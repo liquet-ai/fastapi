@@ -287,7 +287,13 @@ def get_dependant(
     path_param_names = get_path_param_names(path)
     endpoint_signature = get_typed_signature(call)
     signature_params = endpoint_signature.parameters
-    dependant = Dependant(call=call, name=name, path=path, use_cache=use_cache)
+    dependant = Dependant(
+        call=call,
+        name=name,
+        path=path,
+        use_cache=use_cache,
+        overrides=overrides,
+    )
     for param_name, param in signature_params.items():
         if isinstance(param.default, params.Depends):
             sub_dependant = get_param_sub_dependant(
